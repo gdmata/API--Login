@@ -6,10 +6,18 @@ require("dotenv").config();
 //
 //
 //
+const cors = require("cors");
 const app = express();
 const router = express.Router();
 app.use(express.json());
+app.use(cors());
+//
+const orderRoutes = require("./order");
+app.use("/", orderRoutes);
+//
 app.use(router);
+//
+//
 let secret = process.env.JWT_SECRET;
 //
 //
@@ -26,6 +34,8 @@ async function connectToMongoDB() {
     console.log("Você se conectou com sucesso ao MongoDB Atlas!");
     // Define o nome do banco de dados que você quer usar
     db = client.db("SushiManiaDB");
+
+    app.locals.db = db;
     return db;
   } catch (erro) {
     console.error("Erro ao conectar no MongoDB:", erro);
@@ -34,7 +44,9 @@ async function connectToMongoDB() {
 //
 class UserClass {
   #password;
+  static idCounter = 1;
   constructor(userName, userPhone, userAddress, email, password) {
+    this.id = UserClass.idCounter++;
     this.userName = userName;
     this.userPhone = userPhone;
     this.userAddress = userAddress;
@@ -48,6 +60,7 @@ class UserClass {
   //Salvar usuarios em Json/DB
   toDataBase() {
     return {
+      id: this.id,
       userName: this.userName,
       userPhone: this.userPhone,
       userAddress: this.userAddress,
@@ -152,6 +165,6 @@ router.post("/login", async (req, res) => {
 
 connectToMongoDB().then(() => {
   app.listen(3000, () => {
-    console.log("server tá on caraio");
+    console.log("server tá on");
   });
 });
