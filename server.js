@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { randomUUID } = require("node:crypto");
 //
 //
 //
@@ -44,9 +45,8 @@ async function connectToMongoDB() {
 //
 class UserClass {
   #password;
-  static idCounter = 1;
   constructor(userName, userPhone, userAddress, email, password) {
-    this.id = UserClass.idCounter++;
+    this.id = randomUUID();
     this.userName = userName;
     this.userPhone = userPhone;
     this.userAddress = userAddress;
