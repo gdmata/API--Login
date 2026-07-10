@@ -4,13 +4,13 @@ frm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const regData = {
     userName: frm.registerName.value,
-    email: frm.regMail.value,
+    email: frm.regMail.value.toLowerCase(),
     password: frm.regPass.value,
     userPhone: frm.regPhone.value,
     userAddress: frm.regAddress.value,
   };
   try {
-    const res = await fetch("http://localhost:3000/registro", {
+    const res = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
