@@ -4,33 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>SUSHI MANIA CULINARIA ORIENTAL</h1>
     <div>
       <form id="regForm">
         <p>
-          Nome Completo
-          <input type="text" id="registerName" required />
+          Nome
+          <input
+            type="text"
+            id="registerName"
+            placeholder="Insira seu Nome"
+            required
+            class="registerForm"
+          />
         </p>
         <p>
-          E-mail
-          <input type="email" id="regMail" required />
+          Email
+          <input
+            type="email"
+            id="regMail"
+            placeholder="Insira um endereço de email válido"
+            required
+            class="registerForm"
+          />
         </p>
         <p>
           Senha
-          <input type="password" id="regPass" required />
+          <input
+            type="password"
+            id="regPass"
+            placeholder="Digite sua senha"
+            required
+            class="registerForm"
+          />
         </p>
         <p>
-            Telefone
-            <input type="number" required id="regPhone">
-            <h6 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Será necessário verificar</h6>
+          Telefone
+          <input
+            type="text"
+            id="regPhone"
+            placeholder="Insira seu telefone (ex: +1415552675)"
+            required
+            class="registerForm"
+          />
         </p>
-
-        <p>Endereço
-            <input type="text" id="regAddress" required>
+        <p>
+          Endereço
+          <input
+            type="text"
+            id="regAddress"
+            placeholder="Digite seu endereço"
+            required
+            class="registerForm"
+          />
         </p>
-<input type="submit" value="Cadastrar!">
+        <input type="submit" value="Cadastrar-se" />
       </form>
     </div>
     <script src="script.js"></script>

@@ -81,7 +81,7 @@ const login = async (req, res) => {
         secret,
         { expiresIn: "1h" },
       );
-
+      res.set(token);
       return res.status(201).json({
         token,
         mensagem: "Login realizado com sucesso",
