@@ -3,11 +3,10 @@ const bcrypt = require("bcrypt");
 
 class UserClass {
   #password;
-  constructor(userName, userPhone, userAddress, email, password) {
+  constructor(userName, userPhone, email, password) {
     this.id = randomUUID();
     this.userName = userName;
     this.userPhone = userPhone;
-    this.userAddress = userAddress;
     this.email = email;
     this.#password = password;
   }
@@ -21,7 +20,6 @@ class UserClass {
       id: this.id,
       userName: this.userName,
       userPhone: this.userPhone,
-      userAddress: this.userAddress,
       email: this.email,
       password: this.#password,
     };
