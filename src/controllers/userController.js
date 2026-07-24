@@ -9,7 +9,7 @@ const register = async (req, res) => {
   const db = req.app.locals.db;
   try {
     console.log(req.body);
-    const { userName, userPhone, userAddress, email, password } = req.body;
+    const { userName, userPhone, email, password } = req.body;
 
     // acessa a coleção de usuarios do DB
     const userCollection = db.collection("usuarios");
@@ -35,7 +35,6 @@ const register = async (req, res) => {
     let newUser = new UserClass(
       userName,
       userPhone,
-      userAddress,
       email,
       hashPassWord,
     );
@@ -67,7 +66,6 @@ const login = async (req, res) => {
     const userObj = new UserClass(
       userData.userName,
       userData.userPhone,
-      userData.userAddress,
       userData.email,
       userData.password,
     );
@@ -81,7 +79,6 @@ const login = async (req, res) => {
         secret,
         { expiresIn: "1h" },
       );
-      res.set(token);
       return res.status(201).json({
         token,
         mensagem: "Login realizado com sucesso",

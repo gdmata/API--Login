@@ -8,10 +8,11 @@ const userPhoneInput = document.querySelector("#userPhone");
 ///
 const errorMessage = document.querySelector("#errorMessage");
 frm.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const firstName = firstNameInput.value;
   const surName = surNameInput.value;
   const regPhone = userPhoneInput.value;
-  const userMail = emailInput.value;
+  const userMail = emailInput.value.toLowerCase();
   const password = () => {
     if (passwordInput.value === repeatPasswordInput.value) {
       return passwordInput.value;
@@ -23,8 +24,8 @@ frm.addEventListener("submit", async (e) => {
   const regData = {
     userName: `${firstName} ${surName}`,
     userPhone: regPhone,
-    password: password(),
     email: userMail,
+    password: password(),
   };
   console.log(regData);
 
@@ -48,6 +49,7 @@ frm.addEventListener("submit", async (e) => {
   if (errors.length > 0) {
     e.preventDefault();
     errorMessage.textContent = errors.join(". ");
+    return;
   }
   try {
     const response = await fetch("http://localhost:3000/register", {
@@ -58,9 +60,11 @@ frm.addEventListener("submit", async (e) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    const data = await response.json();
-    console.log(data);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      window.location.href = "http://localhost:3000/login.html";
+    }
   } catch (error) {
     console.log("Fetch failed", error);
   }
